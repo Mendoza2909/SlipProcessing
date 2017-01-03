@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/jai-imageio-core-1.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/jna-4.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/jul-to-slf4j-1.7.21.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/lept4j-1.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/logback-core-1.1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/tess4j-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/log4j-over-slf4j-1.7.21.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/logback-classic-1.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/slf4j-api-1.7.21.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/ghost4j-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/jsoup-1.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/pdfbox-app-2.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/pdf-renderer.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
