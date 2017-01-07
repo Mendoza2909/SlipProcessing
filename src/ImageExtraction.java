@@ -35,63 +35,8 @@ public class ImageExtraction {
             double pageWidth = page.getBBox().getWidth();
             double pageHeight = page.getBBox().getHeight();
             
-            
-            
-            //System.out.println("Page width is "+ pageWidth);
-            //System.out.println("Page height is "+ pageHeight);
-            
-            //Rectangle rect = new Rectangle(100, 400, Width,Height);
-            //This is correct Rectangle rect = new Rectangle(100, 700, 180, 20);
-             
-            //Page width is 595.08
-            //Page height is 841.6800000000001
-            
-            //double scaleFactor = 4.166666;
-            
-            
-            //double bboxpageWidth = 2480;
-            //double bboxpageHeight = 3507;
-            
-            //double x_size = 60.35482;
-            
-            
-            
-            //UMR
-            //double bbox1 = 438;
-            //double bbox2 = 526;
-            //double bbox3 = 1092;
-            //double bbox4 = 579;
-            
-            
-            /*
-            //MARKET REFORM CONTRACT
-            double bbox1 = 467;
-            double bbox2 = 877;
-            double bbox3 = 1509;
-            double bbox4 = 952;
-            */
-            
-            /*
-            double bbox1 = 429;
-            double bbox2 = 1155;
-            double bbox3 = 699;
-            double bbox4 = 1182;
-            */
-            
-            
-            
-            //rectx = 
-            
             Rectangle rect = new Rectangle((int) (bbox1/scaleFactor), (int) ((bboxPageHeight - bbox4)/scaleFactor), (int) ((bbox3-bbox1)/scaleFactor)+10, (int) ((bbox4-bbox2)/scaleFactor)+10);
             
-            
-            
-            
-            /*System.out.println("x is "+ rect.getX());
-            System.out.println("y is "+ rect.getX());
-            System.out.println("width is "+ rect.width);
-            System.out.println("height is "+ rect.height);
-            */
             // generate the image
             Image img = page.getImage(rect.width, rect.height, // width & height
                     rect, // clip rect
@@ -103,11 +48,6 @@ public class ImageExtraction {
             
             Rectangle2D pdfpagebox = page.getBBox();
             
-            //System.out.println("bbox is "+ pdfpagebox.toString());
-           
-            //System.out.println("y is "+ rect.getX());
-            //System.out.println("width is "+ rect.width);
-            //System.out.println("height is "+ rect.height);
             // save it as a file
             BufferedImage bImg = toBufferedImage(img);
             //File yourImageFile = new File(filepath+"page_" + i + ".png");

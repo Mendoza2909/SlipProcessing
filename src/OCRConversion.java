@@ -1,20 +1,18 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
+import org.apache.log4j.Logger;
 
 public class OCRConversion  {
 	
-	Tesseract instance = new Tesseract();
+	static Tesseract instance = new Tesseract();
 	
 	
 	//String langData = "C:\\Program Files\\Java\\jdk1.8.0_101\\lib\\libraries\\Tess4J\\";
-	String langData = "C:\\Program Files\\Tess4J";
+	static String langData = "C:\\Program Files\\Tess4J";
 	
 		//S:\Actuarial\Projects\Machine Learning\IPF\Slips Phase 2 Test\Slips
 		//System.out.print(inputpath);
@@ -42,12 +40,12 @@ public class OCRConversion  {
 	        //result = result.replaceAll(",","");
 	        
 
-	public String toHex(String arg) {
+	public static String toHex(String arg) {
 	    return String.format("%040x", new BigInteger(1, arg.getBytes(/*YOUR_CHARSET?*/)));
 	}
 	
 	
-	public String HexToASCII(String arg) {
+	public static String HexToASCII(String arg) {
 	     StringBuilder output = new StringBuilder();
 	    for (int i = 0; i < arg.length(); i+=2) {
 	        String str = arg.substring(i, i+2);
@@ -58,11 +56,11 @@ public class OCRConversion  {
 	
 	
 	
-	public String OCROutput(String inputPath) throws TesseractException{
+	public static String OCROutput(Path inputPath) throws TesseractException{
 		instance.setDatapath(langData);
 		String result = "";
 		instance.setHocr(false);
-		File imageFile = new File(inputPath);
+		File imageFile = new File(inputPath.toString());
 		result = instance.doOCR(imageFile);		
 		result = result.replaceAll("\n", "\r");      
         //Convert to hex, replace 0d with 0a for readability and convert back
@@ -74,11 +72,11 @@ public class OCRConversion  {
         return stringVal;
 	}
 	
-	public String HOCROutput(String inputPath) throws TesseractException{
+	public static String HOCROutput(Path inputPath) throws TesseractException{
 		instance.setDatapath(langData);
 		String result = "";
 		instance.setHocr(true);
-		File imageFile = new File(inputPath);
+		File imageFile = new File(inputPath.toString());
 		result = instance.doOCR(imageFile);		
 		result = result.replaceAll("\n", "\r");      
         //Convert to hex, replace 0d with 0a for readability and convert back

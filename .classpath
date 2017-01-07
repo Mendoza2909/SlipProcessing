@@ -15,6 +15,7 @@
 	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/ghost4j-1.0.1.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/jsoup-1.10.1.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/pdfbox-app-2.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/pdf-renderer.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/pdf-renderer-1.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/External Libraries/itextpdf-5.5.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

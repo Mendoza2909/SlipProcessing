@@ -11,7 +11,7 @@ public class RegexProcess {
 	public String[][] processText(String OCRString){
 		
 		//Extra columns to allow for multiple guesses
-		String regexArray[][] = new String[24][5];
+		String regexArray[][] = new String[13][5];
 		
 		//Number of columns
 		Integer regexWidth = regexArray.length;
@@ -109,13 +109,13 @@ public class RegexProcess {
 		regexArray[11][3] = "None";
 		regexArray[11][4] = "None";
 				
-		regexArray[12][0] = "2005 Claims";
-		regexArray[12][1] = "(?<=((?i)Loss Record.(?-i)|(?i)Loss History(?-i))).*?2005.*?(\\d+|(?i)Nil(?-i))";		
+		regexArray[12][0] = "Claims";
+		regexArray[12][1] = "(?<=((?i)Loss Record.(?-i)|(?i)Loss History(?-i)))";		
 		regexArray[12][2] = "None";
 		regexArray[12][3] = "None";
 		regexArray[12][4] = "None";
 		
-		regexArray[13][0] = "2006 Claims";
+		/*regexArray[13][0] = "2006 Claims";
 		regexArray[13][1] = "(?<=((?i)Loss Record.(?-i)|(?i)Loss History(?-i))).*?2006.*?(\\d+|(?i)Nil(?-i))";		
 		regexArray[13][2] = "None";
 		regexArray[13][3] = "None";
@@ -180,7 +180,7 @@ public class RegexProcess {
 		regexArray[23][2] = "None";
 		regexArray[23][3] = "None";
 		regexArray[23][4] = "None";
-		
+		*/
 
 		
 		
@@ -231,7 +231,7 @@ public class RegexProcess {
 	    String[] OCRDelimited = OCRString.split(" ");
 	    
 	    for (int j = 0; j < regexWidth; j++) {
-			regexSearch regexSearch = new regexSearch();
+			RegexSearch regexSearch = new RegexSearch();
 			
 			processText[0][j] = regexSearch.searchRegex(OCRString, regexArray[j][1], regexArray[j][2],regexArray[j][3], regexArray[j][4], regexArray[j][0]);
 			

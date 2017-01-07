@@ -1,14 +1,10 @@
 package HOCR;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,15 +18,7 @@ public class HOCRParser {
 		//String inputFileStringText = "C:/Users/Colin/Documents/PDF Conversion/Input Folder/Abcourt Mining 2016 Slip HOCR Output.txt";
 		//String inputFileStringPDF = "C:/Users/Colin/Documents/PDF Conversion/Input Folder/Abcourt Mining 2016 Slip.pdf";
 		
-		//PDDocument docpdf = PDDocument.load(new File(inputFileStringPDF));
-		//int pageCount = docpdf.getNumberOfPages();	
-		//System.out.println(pageCount);
-		
 		String html = inputTextFile;
-
-		//html = new Scanner(new File(inputFileStringText)).useDelimiter("\\Z").next();
-					   
-	    //System.out.println("Number of words: " + count);
 	    
 		Document doc = Jsoup.parse(html);
 		
@@ -60,7 +48,6 @@ public class HOCRParser {
 		
 		//Array of page number, total word count, word count on page, 4 x bbox coordinates 
 		String[][] wordAttributes = new String[docWordCount+1][8]; 
-		//String[][] words = new String[docWordCount+1][1]; 
 		
 		wordAttributes[0][0] = "Word Count";
 		wordAttributes[0][1] = "Word";
@@ -123,6 +110,8 @@ public class HOCRParser {
 
 
 public static double pageHeight(String inputHOCRText) throws FileNotFoundException{
+	
+	//System.out.println(inputHOCRText);
 	String pageDimRegex = "\\s0\\s0\\s(\\d{1,5})\\s(\\d{1,5})";
 	String html;
 	//html = new Scanner(new File(fileName)).useDelimiter("\\Z").next();    
