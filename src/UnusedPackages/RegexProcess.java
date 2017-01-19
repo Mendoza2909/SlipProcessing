@@ -1,3 +1,4 @@
+package UnusedPackages;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -6,26 +7,12 @@ import java.nio.file.Paths;
 
 import org.apache.commons.io.FilenameUtils;
 
-public class TextProcess {
-	
-	//Takes a list of text files and returns an array of data corresponding to the important information from each file
-	
-	
-	//Keeping commented list of what each Excel column will be. 
-	//The list of regex searches for each variable will eventually be put into an multidimensional array, 
-	//where each row will correspond to a new column and each column will be a different search attempt i.e. if the first one fails.
-	//Column 1 - filename
-	//pattern1 - UMR - "(?:B[0-9][^\\s]*[A-Za-z][^\\s]*)|(?:B[A-Za-z][^\\s]*[0-9][^\\s]*)";	
-	//pattern2 - InceptionDay - "(?<=((?i)Period.(?-i)|(?i)Effecti(?-i)|(?i)Commenc(?-i))).*?\\s?\\d{1,2}";
-	//pattern3 - InceptionMonth
-	//pattern4 - InceptionYear
-	//pattern5 - 
-	//pattern6 - 
+public class RegexProcess {
 		
-	public String[][] ProcessText(String inputpath){
+	public String[][] processText(String OCRString){
 		
 		//Extra columns to allow for multiple guesses
-		String regexArray[][] = new String[24][5];
+		String regexArray[][] = new String[13][5];
 		
 		//Number of columns
 		Integer regexWidth = regexArray.length;
@@ -123,13 +110,13 @@ public class TextProcess {
 		regexArray[11][3] = "None";
 		regexArray[11][4] = "None";
 				
-		regexArray[12][0] = "2005 Claims";
-		regexArray[12][1] = "(?<=((?i)Loss Record.(?-i)|(?i)Loss History(?-i))).*?2005.*?(\\d+|(?i)Nil(?-i))";		
+		regexArray[12][0] = "Claims";
+		regexArray[12][1] = "(?<=((?i)Loss Record.(?-i)|(?i)Loss History(?-i)))";		
 		regexArray[12][2] = "None";
 		regexArray[12][3] = "None";
 		regexArray[12][4] = "None";
 		
-		regexArray[13][0] = "2006 Claims";
+		/*regexArray[13][0] = "2006 Claims";
 		regexArray[13][1] = "(?<=((?i)Loss Record.(?-i)|(?i)Loss History(?-i))).*?2006.*?(\\d+|(?i)Nil(?-i))";		
 		regexArray[13][2] = "None";
 		regexArray[13][3] = "None";
@@ -194,26 +181,26 @@ public class TextProcess {
 		regexArray[23][2] = "None";
 		regexArray[23][3] = "None";
 		regexArray[23][4] = "None";
-		
+		*/
 
 		
 		
 		//String attempt = "(?<=((?i)LOSS RECORD(?-i)|(?i)LOSS HISTOR(?-i))).*?2014\s*(\d+)\s*2015"
 		
-		File inputfiles = new File(inputpath);	    
-	    File [] files = inputfiles.listFiles();
+		//File inputfiles = new File(inputPath);	    
+	    //File [] files = inputfiles.listFiles();
 	    
 	    //Used for defining a set of ASCII characters for Regex search
-	    Charset charset = Charset.forName("ISO-8859-1");
+	    //Charset charset = Charset.forName("ISO-8859-1");
 		
 	    //Used for calculating success rate of Regex search
 	    //double success = 0;
 	    
 	    //Extra row for column header and extra column for filename
-	    String[][] processText = new String[files.length+1][regexWidth + 1];
+	    String[][] processText = new String[2][regexWidth];
 	    
 	    //Set column headings
-	    processText[0][0] = "File Name";
+	    /*processText[0][0] = "File Name";
 	    processText[0][1] = "UMR";
 	    processText[0][2] = "Inception Day";	
 	    processText[0][3] = "Inception Month";
@@ -237,11 +224,36 @@ public class TextProcess {
 	    processText[0][21] = "2014 Claims";
 	    processText[0][22] = "2015 Claims";
 	    processText[0][23] = "2016 Claims";
-	    
+	    */
 
+		
+		//System.out.println(FilenameUtils.getBaseName(files[i].toString()));
+		
+	    String[] OCRDelimited = OCRString.split(" ");
+	    
+	    for (int j = 0; j < regexWidth; j++) {
+			RegexSearch regexSearch = new RegexSearch();
+			
+			processText[0][j] = regexSearch.searchRegex(OCRString, regexArray[j][1], regexArray[j][2],regexArray[j][3], regexArray[j][4], regexArray[j][0]);
+			
+			for (int k = 0; k < OCRDelimited.length; k++) {
+		        if (OCRDelimited[k].equals(processText[0][j])) {
+		            //System.out.println("The word " + processText[0][j] + " is in the position: " + k);
+		            processText[1][j] = Integer.toString(k);
+		        	break;            
+		        }
+		    }
+			
+			
+			//System.out.println("Text is" + processText[1][j]);
+	    } 
+	    //System.out.println(processText[1][1]);
+	    return processText;
+	 	}
+	    
 	    //Initialise regexSearch	    
 	    
-	    for (int i = 0; i < files.length; i++){
+	    /*for (int i = 0; i < files.length; i++){
 	    	
 	        if (files[i].isFile()){ //this line weeds out other directories/folders
 	        	//System.out.println(files[i]);
@@ -257,7 +269,7 @@ public class TextProcess {
 					
 					//System.out.println(FilenameUtils.getBaseName(files[i].toString()));
 					
-					RegexSearch regexSearch = new RegexSearch();
+					regexSearch regexSearch = new regexSearch();
 					processText[i+1][j] = regexSearch.searchRegex(testFile, regexArray[j][1], regexArray[j][2],regexArray[j][3], regexArray[j][4], regexArray[j][0]);
 			    
 					
@@ -267,14 +279,13 @@ public class TextProcess {
 				} 
 		
 	        }
-	    }
+	    }*/
 				
 	    //Calculate success rate of files processed. Match may not be correct!
 	    //System.out.println("rate = " + success/files.length);
 
 	    //Return output array				
-	    return processText;
-	}
+	 
 		
 		//Function to read file to one long string for purposes of Regex matching
 		static String readFile(String path, Charset encoding) 

@@ -1,10 +1,11 @@
+package UnusedPackages;
 import java.math.BigInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class regexSearch {
+public class RegexSearch {
 
-	public String searchRegex(String searchText, String regexString1, String regexString2, String regexString3, String regexString4,String regexFlag){
+	String searchRegex(String searchText, String regexString1, String regexString2, String regexString3, String regexString4,String regexFlag){
 		
 		//Takes the text to be searched and the regex search string and returns the required information from the text
 				
@@ -15,7 +16,7 @@ public class regexSearch {
 		//The other replacements are for strings in format 2013/14. I'm sure there's a better way than doing 1 by 1 replacements
 		
 		
-		searchText = searchText.replaceAll("UMR 3", "UMR B");
+		/*searchText = searchText.replaceAll("UMR 3", "UMR B");
 		searchText = searchText.replaceAll("\n", " ");
 		searchText = searchText.replaceAll("\r", " ");
 		searchText = searchText.replaceAll("100%", " ");
@@ -45,7 +46,7 @@ public class regexSearch {
 		searchText = searchText.replaceAll("2014/2015", "2014");
 		searchText = searchText.replaceAll("2015/2016", "2015");
 		searchText = searchText.replaceAll("2016/2017", "2016");
-		
+		*/
 		
 		String patternFlag;
 		Pattern r1 = Pattern.compile(regexString1);
@@ -271,7 +272,7 @@ public class regexSearch {
 			else if (regexFlag.toLowerCase().contains("claims") ){
 				
 				if(patternFlag.equals("Pattern1")){
-					patternMatch = m1.group(2);
+					patternMatch = m1.group(1);
 				}
 				else{
 					//patternMatch = m2.group(2);
@@ -289,7 +290,15 @@ public class regexSearch {
 		
 	
 		
-		return patternMatch;
+	
+		
+		public String UMRSearch(patternMatch){
+			patternMatch = m1.group(0);
+			return patternMatch;
+		}
+		
 	}
+	
+	
 }
 

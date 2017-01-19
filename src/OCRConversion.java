@@ -7,39 +7,30 @@ import net.sourceforge.tess4j.TesseractException;
 import org.apache.log4j.Logger;
 
 public class OCRConversion  {
+
+	/*
+	This class is used for scanned documents. 
+	It does not recognise 100% of the characters.
+	Work may take place on improving this class to improve % recognition.
+	
+	JNA Interface Mapping   
+	Tesseract1 instance = new Tesseract1(); // JNA Direct Mapping
+	
+	Look at getting cube files
+	e.g. instance.setOcrEngineMode(0);
+	TessResultRenderer ResultRenderer = new TessResultRenderer();
+	OEM_TESSERACT_ONLY	0	Run Tesseract only - fastest
+	OEM_CUBE_ONLY	1	Run Cube only - better accuracy, but slower, and needs some more data to work
+	OEM_TESSERACT_CUBE_COMBINED	2	Run both and combine results - best accuracy
+	OEM_DEFAULT	3 Specify this mode to indicate that any of the above modes should be automatically 
+	inferred from the variables in the language-specific config, or 
+	if not specified in any of the above should be set to the default OEM_TESSERACT_ONLY.
+	*/
 	
 	static Tesseract instance = new Tesseract();
-	
-	
 	//String langData = "C:\\Program Files\\Java\\jdk1.8.0_101\\lib\\libraries\\Tess4J\\";
 	static String langData = "C:\\Program Files\\Tess4J";
 	
-		//S:\Actuarial\Projects\Machine Learning\IPF\Slips Phase 2 Test\Slips
-		//System.out.print(inputpath);
-		//This class is used for scanned documents. 
-		//It does not recognise 100% of the characters.
-		//Work will take place on improving this class to improve % recognition.
-		//File imageFile = new File("S:\\Actuarial\\Projects\\Machine Learning\\ScannedPDF\\ScannedExample1Short.pdf");  
-		//String outputFileName = inputPath.replaceAll(".pdf",".txt");
-		//Path outputFile = Paths.get(inputPath, outputFileName);
-	      // JNA Interface Mapping   
-	    // Tesseract1 instance = new Tesseract1(); // JNA Direct Mapping
-
-	    //Look at getting cube files
-	    //instance.setOcrEngineMode(0);
-       //TessResultRenderer ResultRenderer = new TessResultRenderer();
-	        
-	        //	OEM_TESSERACT_ONLY	0	Run Tesseract only - fastest
-	        //OEM_CUBE_ONLY	1	Run Cube only - better accuracy, but slower
-	        //OEM_TESSERACT_CUBE_COMBINED	2	Run both and combine results - best accuracy
-	        //OEM_DEFAULT	3 Specify this mode to indicate that any of the above modes should be automatically 
-	        //inferred from the variables in the language-specific config, or 
-	        //if not specified in any of the above should be set to the default OEM_TESSERACT_ONLY.
-	       
-	        //get rid of commas as they mess up CSV output and replace newlines with carriage returns
-	        //result = result.replaceAll(",","");
-	        
-
 	public static String toHex(String arg) {
 	    return String.format("%040x", new BigInteger(1, arg.getBytes(/*YOUR_CHARSET?*/)));
 	}
@@ -53,7 +44,6 @@ public class OCRConversion  {
 	    }
 		return output.toString();
 	    }
-	
 	
 	
 	public static String OCROutput(Path inputPath) throws TesseractException{

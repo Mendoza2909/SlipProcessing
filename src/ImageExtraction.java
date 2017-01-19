@@ -17,7 +17,6 @@ import javax.imageio.*;
 import java.awt.image.*;
 
 
-//437 454 1731 501
 public class ImageExtraction {
     public BufferedImage Image(String pdfFileName, int pageNumber, double bbox1, double bbox2, double bbox3, double bbox4, double bboxPageHeight, double scaleFactor) throws IOException {
         // load a pdf from a byte buffer
@@ -35,7 +34,17 @@ public class ImageExtraction {
             double pageWidth = page.getBBox().getWidth();
             double pageHeight = page.getBBox().getHeight();
             
-            Rectangle rect = new Rectangle((int) (bbox1/scaleFactor), (int) ((bboxPageHeight - bbox4)/scaleFactor), (int) ((bbox3-bbox1)/scaleFactor)+10, (int) ((bbox4-bbox2)/scaleFactor)+10);
+            
+            //Rectangle Parameters
+            //Defines the rectangle that will be extracted from the given pageNumber
+            int x1 = (int) (bbox1/scaleFactor);
+            int y1 = (int) ((bboxPageHeight - bbox4)/scaleFactor);
+            //10 pixel buffer on x2 and y2. I should probably put those buffers somewhere else
+            int x2 = (int) ((bbox3-bbox1)/scaleFactor); 
+            int y2 = (int) ((bbox4-bbox2)/scaleFactor);
+            
+            Rectangle rect = new Rectangle(x1, y1, x2, y2);
+            //Rectangle rect = new Rectangle((int) (bbox1/scaleFactor), (int) ((bboxPageHeight - bbox4)/scaleFactor), (int) ((bbox3-bbox1)/scaleFactor)+10, (int) ((bbox4-bbox2)/scaleFactor)+10);
             
             // generate the image
             Image img = page.getImage(rect.width, rect.height, // width & height
@@ -44,17 +53,14 @@ public class ImageExtraction {
                     true, // fill background with white
                     true // block until drawing is done
                     );
-            
-            
-            Rectangle2D pdfpagebox = page.getBBox();
+                 
+            //Rectangle2D pdfpagebox = page.getBBox();
             
             // save it as a file
             BufferedImage bImg = toBufferedImage(img);
             //File yourImageFile = new File(filepath+"page_" + i + ".png");
             //ImageIO.write(bImg, "png", yourImageFile);
-            
-        
-        
+               
         return bImg;
         
     }
@@ -122,6 +128,8 @@ public class ImageExtraction {
     }
 
     public double pageWidth(String pdfFileName) throws IOException{
+    	//Method to get pageWidth of pdf
+    	//Compare with pageWidth given by bbox param in HOCR output to get scale factor
     	File file = new File(pdfFileName);
         RandomAccessFile raf = new RandomAccessFile(file, "r");
         FileChannel channel = raf.getChannel();
@@ -133,6 +141,8 @@ public class ImageExtraction {
     }
     
     public double pageHeight(String pdfFileName) throws IOException{
+    	//Method to get pageHeight of pdf
+    	//Compare with pageHeight given by bbox param in HOCR output to get scale factor
     	File file = new File(pdfFileName);
         RandomAccessFile raf = new RandomAccessFile(file, "r");
         FileChannel channel = raf.getChannel();
